@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+import 'package:quotation_module/design/text_styles.dart';
+
+class QuotationOverviewScreen extends StatelessWidget {
+  const QuotationOverviewScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Quotation Overview"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Title",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text("Amount",
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text("Company",
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 4,
+                  itemBuilder: (context, index) {
+                return Container(
+                  child: InkWell(
+                    onTap: () {
+
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 4),
+                      child: Container(
+                        height: 48,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                            BorderRadius.circular(
+                                8.0),
+                            color: Colors.white),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Text("Quotation 1",style: defaultTextStyle)
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "16\$",
+                                  style: defaultTextStyle,
+                                  overflow: TextOverflow
+                                      .ellipsis,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "Test Company",
+                                  style: defaultTextStyle,
+                                  overflow: TextOverflow
+                                      .ellipsis,),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
