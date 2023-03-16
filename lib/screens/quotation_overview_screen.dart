@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quotation_module/design/text_styles.dart';
+import 'package:quotation_module/screens/quotation_creation_flow/quotation_add_company_details_screen.dart';
 
 class QuotationOverviewScreen extends StatelessWidget {
   const QuotationOverviewScreen({Key? key}) : super(key: key);
@@ -9,6 +10,11 @@ class QuotationOverviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Quotation Overview"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => QuotationAddCompanyDetailsScreen()));
+        },
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
