@@ -20,6 +20,7 @@ class QuotationAddCompanyDetailsScreen extends ConsumerWidget {
                 textEditingController: ref.watch(quotationAddCompanyDetailsNotifier).companyNameController,
                 label: "Company Name",
                 maxLines: 1,
+                errorText: "Company name can't be empty",
                 showError: ref.watch(quotationAddCompanyDetailsNotifier).companyNameError,
                 autoFocus: false,
                 showIcon: false,
@@ -61,7 +62,11 @@ class QuotationAddCompanyDetailsScreen extends ConsumerWidget {
                 title: "Next",
                 width: double.infinity,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => QuotationAddDetailsScreen()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => QuotationAddDetailsScreen()));
+                  ref.read(quotationAddCompanyDetailsNotifier.notifier).goToAddDetailsScreen();
                 },
                 isLoading: false,
             )

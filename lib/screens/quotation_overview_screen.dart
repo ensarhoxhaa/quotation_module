@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotation_module/design/text_styles.dart';
+import 'package:quotation_module/navigator_provider.dart';
+import 'package:quotation_module/routes.dart';
 import 'package:quotation_module/screens/quotation_creation_flow/quotation_add_company_details_screen.dart';
 
-class QuotationOverviewScreen extends StatelessWidget {
+class QuotationOverviewScreen extends ConsumerWidget {
   const QuotationOverviewScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Quotation Overview"),
       ),
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => QuotationAddCompanyDetailsScreen()));
+          ref.watch(navigatorProvider).goToPage(quotationAddCompanyDetailsScreen);
         },
       ),
       body: Padding(

@@ -153,10 +153,7 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
               title: "Next",
               width: double.infinity,
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => QuotationAddImagesScreen()));
+                ref.read(quotationAddDetailsNotifier.notifier).goToAddImagesScreen();
               },
               isLoading: false,
             )
