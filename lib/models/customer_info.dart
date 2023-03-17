@@ -12,5 +12,5 @@ class CustomerInfo {
   final String companyName;
   final String companyAddress;
   final String companyEmail;
-  final String vatNumber;
+  final int vatNumber;
 }
