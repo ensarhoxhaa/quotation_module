@@ -11,4 +11,6 @@ class QuotationAddCompanyDetailsNotifier extends Notifier<QuotationAddCompanyDet
     state = QuotationAddCompanyDetailsState.initial();
     return state;
   }
+
+
 }
