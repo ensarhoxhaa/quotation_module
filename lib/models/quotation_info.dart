@@ -1,6 +1,7 @@
 import 'package:data_class_plugin/data_class_plugin.dart';
+import 'package:quotation_module/models/line_item.dart';
 
-import 'line_item.dart';
+
 @DataClass(fromJson: true, toJson: true)
 class QuotationInfo {
   /// Shorthand constructor
@@ -68,8 +69,7 @@ class QuotationInfo {
       'title': title,
       'description': description,
       'lineItems': <dynamic>[
-        for (final LineItem i0 in lineItems)
-          jsonConverterRegistrant.find(LineItem).toJson(i0),
+        for (final LineItem i0 in lineItems) i0.toJson(),
       ],
     };
   }
@@ -81,9 +81,7 @@ class QuotationInfo {
       description: json['description'] as String,
       lineItems: <LineItem>[
         for (final dynamic i0 in (json['lineItems'] as List<dynamic>))
-          jsonConverterRegistrant
-              .find(LineItem)
-              .fromJson(json['lineItems'], json, 'lineItems') as LineItem,
+          LineItem.fromJson(i0),
       ],
     );
   }

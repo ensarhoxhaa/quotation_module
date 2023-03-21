@@ -77,6 +77,9 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                                 .lineItemsControllers[index]
                                 .priceController,
                             label: "Price",
+                            onChanged: (value) {
+                              ref.read(quotationAddDetailsNotifier.notifier).calculateLineItemPrice(index);
+                            },
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,
@@ -93,6 +96,9 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                                 .lineItemsControllers[index]
                                 .quantityController,
                             label: "Quantity",
+                            onChanged: (value) {
+                              ref.read(quotationAddDetailsNotifier.notifier).calculateLineItemPrice(index);
+                            },
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,

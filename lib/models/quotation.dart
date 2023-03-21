@@ -16,7 +16,7 @@ class Quotation {
   final CustomerInfo costumerInfo;
   final QuotationInfo quotationInfo;
   final double totalPrice;
-  final List<String> photos;
+  final List photos;
 
   /// Returns a string with the properties of [Quotation]
   @override
@@ -60,7 +60,7 @@ class Quotation {
     final CustomerInfo? costumerInfo,
     final QuotationInfo? quotationInfo,
     final double? totalPrice,
-    final List<String>? photos,
+    final List<dynamic>? photos,
   }) {
     return Quotation(
       costumerInfo: costumerInfo ?? this.costumerInfo,
@@ -76,9 +76,10 @@ class Quotation {
       costumerInfo: CustomerInfo.fromJson(json['costumerInfo']),
       quotationInfo: QuotationInfo.fromJson(json['quotationInfo']),
       totalPrice: json['totalPrice'] as double,
-      photos: <String>[
+      photos: <dynamic>[
         for (final dynamic i0 in (json['photos'] as List<dynamic>))
-          i0 as String,
+// FIXME: variable is dynamic or contains a type that is not yet declared
+          i0,
       ],
     );
   }
@@ -90,7 +91,7 @@ class Quotation {
       'quotationInfo': quotationInfo.toJson(),
       'totalPrice': totalPrice,
       'photos': <dynamic>[
-        for (final String i0 in photos) i0,
+        for (final dynamic i0 in photos) i0,
       ],
     };
   }

@@ -7,16 +7,19 @@ class QuotationAddImagesState {
   QuotationAddImagesState({
     required this.titleController,
     required this.descriptionController,
+    required this.totalPriceController,
     required this.images,
   });
 
   QuotationAddImagesState.initial()
       : titleController = TextEditingController(),
         descriptionController = TextEditingController(),
+        totalPriceController = TextEditingController(),
         images = [];
 
   final TextEditingController titleController;
   final TextEditingController descriptionController;
+  final TextEditingController totalPriceController;
   final List images;
 
   /// Returns a string with the properties of [QuotationAddImagesState]
@@ -25,7 +28,7 @@ class QuotationAddImagesState {
     String value = 'QuotationAddImagesState{<optimized out>}';
     assert(() {
       value =
-          'QuotationAddImagesState@<$hexIdentity>{titleController: $titleController, descriptionController: $descriptionController, images: $images}';
+          'QuotationAddImagesState@<$hexIdentity>{titleController: $titleController, descriptionController: $descriptionController, totalPriceController: $totalPriceController, images: $images}';
       return true;
     }());
     return value;
@@ -38,6 +41,7 @@ class QuotationAddImagesState {
       runtimeType,
       titleController,
       descriptionController,
+      totalPriceController,
       images,
     ]);
   }
@@ -51,6 +55,7 @@ class QuotationAddImagesState {
             runtimeType == other.runtimeType &&
             titleController == other.titleController &&
             descriptionController == other.descriptionController &&
+            totalPriceController == other.totalPriceController &&
             deepEquality(images, other.images);
   }
 
@@ -58,12 +63,14 @@ class QuotationAddImagesState {
   QuotationAddImagesState copyWith({
     final TextEditingController? titleController,
     final TextEditingController? descriptionController,
+    final TextEditingController? totalPriceController,
     final List<dynamic>? images,
   }) {
     return QuotationAddImagesState(
       titleController: titleController ?? this.titleController,
       descriptionController:
           descriptionController ?? this.descriptionController,
+      totalPriceController: totalPriceController ?? this.totalPriceController,
       images: images ?? this.images,
     );
   }

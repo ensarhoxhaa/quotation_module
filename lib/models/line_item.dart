@@ -12,7 +12,7 @@ class LineItem {
   });
 
   final String title;
-  final String price;
+  final double price;
   final double quantity;
   final double totalPrice;
 
@@ -56,7 +56,7 @@ class LineItem {
   /// Creates a new instance of [LineItem] with optional new values
   LineItem copyWith({
     final String? title,
-    final String? price,
+    final double? price,
     final double? quantity,
     final double? totalPrice,
   }) {
@@ -82,7 +82,7 @@ class LineItem {
   factory LineItem.fromJson(Map<dynamic, dynamic> json) {
     return LineItem(
       title: json['title'] as String,
-      price: json['price'] as String,
+      price: json['price'] as double,
       quantity: json['quantity'] as double,
       totalPrice: json['totalPrice'] as double,
     );

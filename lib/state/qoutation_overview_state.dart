@@ -1,4 +1,5 @@
 import 'package:data_class_plugin/data_class_plugin.dart';
+import 'package:quotation_module/models/quotation.dart';
 
 @DataClass()
 class QuotationOverviewState {
@@ -58,11 +59,13 @@ class QuotationOverviewData {
     required this.title,
     required this.amount,
     required this.company,
+    required this.quotation,
   });
 
   final String title;
   final double amount;
   final String company;
+  final Quotation quotation;
 
   /// Returns a string with the properties of [QuotationOverviewData]
   @override
@@ -70,7 +73,7 @@ class QuotationOverviewData {
     String value = 'QuotationOverviewData{<optimized out>}';
     assert(() {
       value =
-      'QuotationOverviewData@<$hexIdentity>{title: $title, amount: $amount, company: $company}';
+          'QuotationOverviewData@<$hexIdentity>{title: $title, amount: $amount, company: $company, quotation: $quotation}';
       return true;
     }());
     return value;
@@ -84,6 +87,7 @@ class QuotationOverviewData {
       title,
       amount,
       company,
+      quotation,
     ]);
   }
 
@@ -96,7 +100,8 @@ class QuotationOverviewData {
             runtimeType == other.runtimeType &&
             title == other.title &&
             amount == other.amount &&
-            company == other.company;
+            company == other.company &&
+            quotation == other.quotation;
   }
 
   /// Creates a new instance of [QuotationOverviewData] with optional new values
@@ -104,11 +109,13 @@ class QuotationOverviewData {
     final String? title,
     final double? amount,
     final String? company,
+    final Quotation? quotation,
   }) {
     return QuotationOverviewData(
       title: title ?? this.title,
       amount: amount ?? this.amount,
       company: company ?? this.company,
+      quotation: quotation ?? this.quotation,
     );
   }
 }

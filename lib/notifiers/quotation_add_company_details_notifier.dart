@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotation_module/models/customer_info.dart';
 import 'package:quotation_module/navigator_provider.dart';
 import 'package:quotation_module/routes.dart';
+import 'package:quotation_module/services/parsing_service.dart';
 import 'package:quotation_module/services/validation_service.dart';
 import 'package:quotation_module/state/qoutation_add_company_details_state.dart';
 
@@ -36,7 +37,11 @@ class QuotationAddCompanyDetailsNotifier
     return CustomerInfo(
         companyName: state.companyNameController.text,
         companyAddress: state.companyAddressController.text,
-        vatNumber: int.parse(state.vatNumberController.text),
+        vatNumber: ref.read(parsingService).parseIntFromString(state.vatNumberController.text),
         companyEmail: state.emailAddressController.text);
+  }
+
+  void clearState() {
+    state = QuotationAddCompanyDetailsState.initial();
   }
 }

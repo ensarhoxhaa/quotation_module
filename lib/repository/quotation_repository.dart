@@ -13,12 +13,13 @@ class QuotationRepository {
 
   createQuotation(Quotation quotation) async {
     await quotationService.createQuotation(quotation);
+    return true;
   }
 
   getAllQuotationsForOverviewScreen() async {
     quotations = await quotationService.getAllQuotations();
-    List quotationsOverviewDataList = [];
-    quotations.forEach((element) {quotationsOverviewDataList.add(QuotationOverviewData(title: element.quotationInfo.title, amount: element.totalPrice, company: element.costumerInfo.companyName));});
+    List<QuotationOverviewData> quotationsOverviewDataList = [];
+    quotations.forEach((element) {quotationsOverviewDataList.add(QuotationOverviewData(title: element.quotationInfo.title, amount: element.totalPrice, company: element.costumerInfo.companyName, quotation: element));});
     return quotationsOverviewDataList;
   }
 }

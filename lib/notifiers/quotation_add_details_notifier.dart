@@ -2,12 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotation_module/models/line_item.dart';
 import 'package:quotation_module/models/quotation_info.dart';
 import 'package:quotation_module/navigator_provider.dart';
+import 'package:quotation_module/notifiers/quotation_add_images_notifier.dart';
 import 'package:quotation_module/routes.dart';
+import 'package:quotation_module/services/parsing_service.dart';
 import 'package:quotation_module/services/validation_service.dart';
 import 'package:quotation_module/state/qoutation_add_details_state.dart';
 
 final quotationAddDetailsNotifier =
-    NotifierProvider<QuotationAddDetailsNotifier, QuotationAddDetailsState>(() {
+NotifierProvider<QuotationAddDetailsNotifier, QuotationAddDetailsState>(() {
   return QuotationAddDetailsNotifier();
 });
 
@@ -34,13 +36,14 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
   void goToAddImagesScreen() {
     if (_validateForm()) {
       _removeEmptyLineItems();
+      ref.read(quotationAddImagesNotifier.notifier).initTextFieldsWithData();
       ref.read(navigatorProvider).goToPage(quotationAddImagesScreen);
     }
   }
 
   bool _validateForm() {
     bool isValid =
-        ref.read(validationService).validateField(state.titleController.text);
+    ref.read(validationService).validateField(state.titleController.text);
     state = state.copyWith(titleError: !isValid);
     return isValid;
   }
@@ -55,24 +58,51 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
     }
   }
 
-  getLineItemsInfo() {
+  List<LineItem> getLineItemsInfo() {
     List<LineItem> itemList = [];
-    for (int i = 1; i < state.lineItemsControllers.length; i++) {
+    for (int i = 0; i < state.lineItemsControllers.length; i++) {
       itemList.add(LineItem(
           title: state.lineItemsControllers[i].titleController.text,
-          price: state.lineItemsControllers[i].titleController.text,
-          quantity:
-              double.parse(state.lineItemsControllers[i].titleController.text),
+          price: ref.read(parsingService).parseDoubleFromString(
+              state.lineItemsControllers[i].titleController.text),
+          quantity: ref.read(parsingService).parseDoubleFromString(state.lineItemsControllers[i].titleController.text),
           totalPrice:
-              double.parse(state.lineItemsControllers[i].titleController.text)));
+          ref.read(parsingService).parseDoubleFromString(state.lineItemsControllers[i].titleController.text)));
     }
     return itemList;
   }
 
-  getFieldInfo() {
+  calculateLineItemPrice(int index) {
+    if (state.lineItemsControllers[index].priceController.text.isEmpty ||
+        state.lineItemsControllers[index].quantityController.text.isEmpty) {
+      state.lineItemsControllers[index].totalController.text = "";
+    }
+    else {
+      double totalPrice = ref.read(parsingService).parseDoubleFromString(
+          state.lineItemsControllers[index].priceController.text) +
+          ref.read(parsingService).parseDoubleFromString(
+              state.lineItemsControllers[index].quantityController.text);
+      state.lineItemsControllers[index].totalController.text =
+          totalPrice.toString();
+    }
+  }
+
+  QuotationInfo getFieldInfo() {
     return QuotationInfo(
         title: state.titleController.text,
         description: state.descriptionController.text,
         lineItems: getLineItemsInfo());
+  }
+
+  List<double> getAllListItemsPrices() {
+    List<double> listItemPrices = [];
+    for (var element in state.lineItemsControllers) {
+      listItemPrices.add(ref.read(parsingService).parseDoubleFromString(element.totalController.text));
+    }
+    return listItemPrices;
+  }
+
+  void clearState() {
+    state = QuotationAddDetailsState.initial();
   }
 }

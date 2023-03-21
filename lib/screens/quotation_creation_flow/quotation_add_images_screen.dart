@@ -18,20 +18,28 @@ class QuotationAddImagesScreen extends ConsumerWidget {
         child: Column(
           children: [
             AppTextField(
-                textEditingController: TextEditingController(),
+                textEditingController: ref.watch(quotationAddImagesNotifier).titleController,
                 label: "Title",
                 maxLines: 1,
                 showError: false,
                 autoFocus: false,
-                editable: true),
+                editable: false),
             SizedBox(height: 10,),
             AppTextField(
-                textEditingController: TextEditingController(),
+                textEditingController: ref.watch(quotationAddImagesNotifier).descriptionController,
                 label: "Description",
                 maxLines: 2,
                 showError: false,
                 autoFocus: false,
-                editable: true),
+                editable: false),
+            SizedBox(height: 10,),
+            AppTextField(
+                textEditingController: ref.watch(quotationAddImagesNotifier).totalPriceController,
+                label: "Total Price",
+                maxLines: 1,
+                showError: false,
+                autoFocus: false,
+                editable: false),
             SizedBox(height: 10,),
             TextButton(onPressed: () {}, child: Text("+ Attach new image")),
             SizedBox(height: 20,),
@@ -39,7 +47,7 @@ class QuotationAddImagesScreen extends ConsumerWidget {
               title: "Save",
               width: double.infinity,
               onTap: () {
-                ref.read(quotationAddImagesNotifier.notifier).createQuotation();
+                ref.read(quotationAddImagesNotifier.notifier).completeQuotationCreationFlow();
               },
               isLoading: false,
             )

@@ -20,6 +20,10 @@ class NavigatorProvider extends ChangeNotifier {
     }
   }
 
+  void goToPageAndRemoveAll(MaterialPage page) {
+    _setStack([page]);
+  }
+
   void goToPage(MaterialPage page) {
     if (!backstack.contains(page)) {
       _setStack([...backstack, page]);
