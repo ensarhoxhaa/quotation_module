@@ -24,10 +24,9 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                     ref.watch(quotationAddDetailsNotifier).titleController,
                 label: "Title",
                 maxLines: 1,
-                showError: false,
+                showError: ref.watch(quotationAddDetailsNotifier).titleError,
+                errorText: "Title can't be empty",
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(
               height: 10,
@@ -40,8 +39,6 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                 maxLines: 2,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(
               height: 10,
@@ -67,8 +64,6 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,
-                            showIcon: false,
-                            iconPath: "",
                             editable: true),
                       ),
                       SizedBox(
@@ -85,8 +80,6 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,
-                            showIcon: false,
-                            iconPath: "",
                             editable: true),
                       ),
                       SizedBox(
@@ -103,8 +96,6 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,
-                            showIcon: false,
-                            iconPath: "",
                             editable: true),
                       ),
                       SizedBox(
@@ -121,8 +112,6 @@ class QuotationAddDetailsScreen extends ConsumerWidget {
                             maxLines: 1,
                             showError: false,
                             autoFocus: false,
-                            showIcon: false,
-                            iconPath: "",
                             editable: false),
                       ),
                       SizedBox(

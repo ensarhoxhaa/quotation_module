@@ -8,24 +8,27 @@ class QuotationAddDetailsState {
     required this.titleController,
     required this.descriptionController,
     required this.lineItemsControllers,
+    required this.titleError,
   });
 
   QuotationAddDetailsState.initial()
       : titleController = TextEditingController(),
         descriptionController = TextEditingController(),
-        lineItemsControllers = [LineItemsController.initial()];
+        lineItemsControllers = [LineItemsController.initial()],
+        titleError = false;
 
   final TextEditingController titleController;
   final TextEditingController descriptionController;
   final List<LineItemsController> lineItemsControllers;
+  final bool titleError;
 
   /// Returns a string with the properties of [QuotationAddDetailsState]
   @override
   String toString() {
-    String value = 'QuotationAddDetailsScreenState{<optimized out>}';
+    String value = 'QuotationAddDetailsState{<optimized out>}';
     assert(() {
       value =
-          'QuotationAddDetailsScreenState@<$hexIdentity>{titleController: $titleController, descriptionController: $descriptionController, lineItemsControllers: $lineItemsControllers}';
+          'QuotationAddDetailsState@<$hexIdentity>{titleController: $titleController, descriptionController: $descriptionController, lineItemsControllers: $lineItemsControllers, titleError: $titleError}';
       return true;
     }());
     return value;
@@ -39,6 +42,7 @@ class QuotationAddDetailsState {
       titleController,
       descriptionController,
       lineItemsControllers,
+      titleError,
     ]);
   }
 
@@ -51,7 +55,8 @@ class QuotationAddDetailsState {
             runtimeType == other.runtimeType &&
             titleController == other.titleController &&
             descriptionController == other.descriptionController &&
-            deepEquality(lineItemsControllers, other.lineItemsControllers);
+            deepEquality(lineItemsControllers, other.lineItemsControllers) &&
+            titleError == other.titleError;
   }
 
   /// Creates a new instance of [QuotationAddDetailsState] with optional new values
@@ -59,12 +64,14 @@ class QuotationAddDetailsState {
     final TextEditingController? titleController,
     final TextEditingController? descriptionController,
     final List<LineItemsController>? lineItemsControllers,
+    final bool? titleError,
   }) {
     return QuotationAddDetailsState(
       titleController: titleController ?? this.titleController,
       descriptionController:
           descriptionController ?? this.descriptionController,
       lineItemsControllers: lineItemsControllers ?? this.lineItemsControllers,
+      titleError: titleError ?? this.titleError,
     );
   }
 }
@@ -84,11 +91,11 @@ class LineItemsController {
   final TextEditingController quantityController;
   final TextEditingController totalController;
 
-  LineItemsController.initial() :
-      titleController = TextEditingController(),
-    priceController = TextEditingController(),
-  quantityController = TextEditingController(),
-  totalController = TextEditingController();
+  LineItemsController.initial()
+      : titleController = TextEditingController(),
+        priceController = TextEditingController(),
+        quantityController = TextEditingController(),
+        totalController = TextEditingController();
 
   /// Returns a string with the properties of [LineItemsController]
   @override

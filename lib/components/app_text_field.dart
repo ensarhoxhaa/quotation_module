@@ -15,8 +15,6 @@ class AppTextField extends StatelessWidget {
     this.color,
     this.height,
     this.autoCorrect,
-    required this.showIcon,
-    required this.iconPath,
     this.textInputType,
     required this.editable,
     this.focusNode,
@@ -34,8 +32,6 @@ class AppTextField extends StatelessWidget {
   final Color? color;
   final double? height;
   final bool? autoCorrect;
-  final bool showIcon;
-  final String iconPath;
   final TextInputType? textInputType;
   final bool editable;
   final FocusNode? focusNode;
@@ -55,37 +51,27 @@ class AppTextField extends StatelessWidget {
               Radius.circular(10),
             ),
           ),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  focusNode: focusNode,
-                  enabled: editable ?? true,
-                  enableInteractiveSelection: true,
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: textEditingController,
-                  onTap: onTap,
-                  onChanged: onChanged,
-                  maxLines: maxLines,
-                  autofocus: autoFocus,
-                  enableSuggestions: autoCorrect ?? true,
-                  autocorrect: autoCorrect ?? true,
-                  keyboardType: textInputType ?? TextInputType.text,
-                  scrollPadding: EdgeInsets.only(bottom: scrollPadding ?? 120),
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 8,bottom: 8),
-                      labelText: label,
-                      // labelStyle: textFieldLabelTextStyle,
-                      labelStyle: TextStyle(),
-                      border: InputBorder.none,
-                      floatingLabelBehavior: FloatingLabelBehavior.always),
-                ),
-              ),
-              showIcon ?? false ? Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: SvgPicture.asset(iconPath),
-              ) : SizedBox()
-            ],
+          child: TextFormField(
+            focusNode: focusNode,
+            enabled: editable ?? true,
+            enableInteractiveSelection: true,
+            textCapitalization: TextCapitalization.sentences,
+            controller: textEditingController,
+            onTap: onTap,
+            onChanged: onChanged,
+            maxLines: maxLines,
+            autofocus: autoFocus,
+            enableSuggestions: autoCorrect ?? true,
+            autocorrect: autoCorrect ?? true,
+            keyboardType: textInputType ?? TextInputType.text,
+            scrollPadding: EdgeInsets.only(bottom: scrollPadding ?? 120),
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(top: 8,bottom: 8),
+                labelText: label,
+                // labelStyle: textFieldLabelTextStyle,
+                labelStyle: TextStyle(),
+                border: InputBorder.none,
+                floatingLabelBehavior: FloatingLabelBehavior.always),
           ),
         ),
         showError

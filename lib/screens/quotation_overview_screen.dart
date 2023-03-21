@@ -75,7 +75,7 @@ class QuotationOverviewScreen extends ConsumerWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                child: Text("Quotation 1",style: defaultTextStyle)
+                                child: Text(ref.watch(quotationOverviewNo).,style: defaultTextStyle)
                             ),
                             Expanded(
                               child: Align(

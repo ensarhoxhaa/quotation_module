@@ -23,8 +23,6 @@ class QuotationAddCompanyDetailsScreen extends ConsumerWidget {
                 errorText: "Company name can't be empty",
                 showError: ref.watch(quotationAddCompanyDetailsNotifier).companyNameError,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 10,),
             AppTextField(
@@ -33,18 +31,15 @@ class QuotationAddCompanyDetailsScreen extends ConsumerWidget {
                 maxLines: 1,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 10,),
             AppTextField(
                 textEditingController: ref.watch(quotationAddCompanyDetailsNotifier).emailAddressController,
                 label: "Email Address",
+                textInputType: TextInputType.emailAddress,
                 maxLines: 1,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 10,),
             AppTextField(
@@ -54,8 +49,6 @@ class QuotationAddCompanyDetailsScreen extends ConsumerWidget {
                 maxLines: 1,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 20,),
             AppButton(

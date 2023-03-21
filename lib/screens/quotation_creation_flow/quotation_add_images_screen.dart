@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotation_module/components/app_button.dart';
 import 'package:quotation_module/components/app_text_field.dart';
+import 'package:quotation_module/notifiers/quotation_add_images_notifier.dart';
 
-class QuotationAddImagesScreen extends StatelessWidget {
+class QuotationAddImagesScreen extends ConsumerWidget {
   const QuotationAddImagesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Images"),
@@ -21,8 +23,6 @@ class QuotationAddImagesScreen extends StatelessWidget {
                 maxLines: 1,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 10,),
             AppTextField(
@@ -31,8 +31,6 @@ class QuotationAddImagesScreen extends StatelessWidget {
                 maxLines: 2,
                 showError: false,
                 autoFocus: false,
-                showIcon: false,
-                iconPath: "",
                 editable: true),
             SizedBox(height: 10,),
             TextButton(onPressed: () {}, child: Text("+ Attach new image")),
@@ -41,7 +39,7 @@ class QuotationAddImagesScreen extends StatelessWidget {
               title: "Save",
               width: double.infinity,
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => QuotationAddImagesScreen()));
+                ref.read(quotationAddImagesNotifier.notifier).createQuotation();
               },
               isLoading: false,
             )

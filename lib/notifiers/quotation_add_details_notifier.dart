@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quotation_module/models/line_item.dart';
+import 'package:quotation_module/models/quotation_info.dart';
 import 'package:quotation_module/navigator_provider.dart';
 import 'package:quotation_module/routes.dart';
+import 'package:quotation_module/services/validation_service.dart';
 import 'package:quotation_module/state/qoutation_add_details_state.dart';
 
 final quotationAddDetailsNotifier =
@@ -29,18 +32,17 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
   }
 
   void goToAddImagesScreen() {
-    if(_validateForm()) {
+    if (_validateForm()) {
       _removeEmptyLineItems();
       ref.read(navigatorProvider).goToPage(quotationAddImagesScreen);
     }
   }
 
   bool _validateForm() {
-    if (state.titleController.text.isEmpty) {
-      return true;
-    } else {
-      return false;
-    }
+    bool isValid =
+        ref.read(validationService).validateField(state.titleController.text);
+    state = state.copyWith(titleError: !isValid);
+    return isValid;
   }
 
   void _removeEmptyLineItems() {
@@ -51,5 +53,26 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
         removeLineItemByIndex(i);
       }
     }
+  }
+
+  getLineItemsInfo() {
+    List<LineItem> itemList = [];
+    for (int i = 1; i < state.lineItemsControllers.length; i++) {
+      itemList.add(LineItem(
+          title: state.lineItemsControllers[i].titleController.text,
+          price: state.lineItemsControllers[i].titleController.text,
+          quantity:
+              double.parse(state.lineItemsControllers[i].titleController.text),
+          totalPrice:
+              double.parse(state.lineItemsControllers[i].titleController.text)));
+    }
+    return itemList;
+  }
+
+  getFieldInfo() {
+    return QuotationInfo(
+        title: state.titleController.text,
+        description: state.descriptionController.text,
+        lineItems: getLineItemsInfo());
   }
 }
