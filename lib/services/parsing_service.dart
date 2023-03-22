@@ -7,6 +7,7 @@ class ParsingService {
     try {
       return double.parse(text);
     } catch (e) {
+      print(e);
       return 0.0;
     }
   }

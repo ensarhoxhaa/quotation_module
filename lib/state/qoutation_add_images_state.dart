@@ -1,5 +1,6 @@
 import 'package:data_class_plugin/data_class_plugin.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 
 @DataClass()
 class QuotationAddImagesState {
@@ -20,7 +21,7 @@ class QuotationAddImagesState {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
   final TextEditingController totalPriceController;
-  final List images;
+  final List<XFile> images;
 
   /// Returns a string with the properties of [QuotationAddImagesState]
   @override
@@ -64,7 +65,7 @@ class QuotationAddImagesState {
     final TextEditingController? titleController,
     final TextEditingController? descriptionController,
     final TextEditingController? totalPriceController,
-    final List<dynamic>? images,
+    final List<XFile>? images,
   }) {
     return QuotationAddImagesState(
       titleController: titleController ?? this.titleController,

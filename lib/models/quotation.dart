@@ -1,4 +1,6 @@
 import 'package:data_class_plugin/data_class_plugin.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:quotation_module/models/custom_image.dart';
 
 import 'customer_info.dart';
 import 'quotation_info.dart';
@@ -16,7 +18,7 @@ class Quotation {
   final CustomerInfo costumerInfo;
   final QuotationInfo quotationInfo;
   final double totalPrice;
-  final List photos;
+  final List<CustomImage> photos;
 
   /// Returns a string with the properties of [Quotation]
   @override
@@ -60,7 +62,7 @@ class Quotation {
     final CustomerInfo? costumerInfo,
     final QuotationInfo? quotationInfo,
     final double? totalPrice,
-    final List<dynamic>? photos,
+    final List<CustomImage>? photos,
   }) {
     return Quotation(
       costumerInfo: costumerInfo ?? this.costumerInfo,
@@ -76,10 +78,9 @@ class Quotation {
       costumerInfo: CustomerInfo.fromJson(json['costumerInfo']),
       quotationInfo: QuotationInfo.fromJson(json['quotationInfo']),
       totalPrice: json['totalPrice'] as double,
-      photos: <dynamic>[
+      photos: <CustomImage>[
         for (final dynamic i0 in (json['photos'] as List<dynamic>))
-// FIXME: variable is dynamic or contains a type that is not yet declared
-          i0,
+          CustomImage.fromJson(i0),
       ],
     );
   }
@@ -91,7 +92,7 @@ class Quotation {
       'quotationInfo': quotationInfo.toJson(),
       'totalPrice': totalPrice,
       'photos': <dynamic>[
-        for (final dynamic i0 in photos) i0,
+        for (final CustomImage i0 in photos) i0.toJson(),
       ],
     };
   }

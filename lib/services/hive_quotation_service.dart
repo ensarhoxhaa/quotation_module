@@ -27,15 +27,13 @@ class HiveQuotationService implements IQuotationService {
 
   @override
   Future<bool> createQuotation(Quotation quotation) async {
-    await _localBox.add(quotation.toJson());
-
-    return true;
-    // try {
-    //   await _localBox.add(quotation.toJson());
-    //   return true;
-    // }
-    // catch (e) {
-    //   return false;
-    // }
+    try {
+      await _localBox.add(quotation.toJson());
+      return true;
+    }
+    catch (e) {
+      print(e);
+      return false;
+    }
   }
 }

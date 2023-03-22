@@ -29,6 +29,12 @@ class NavigatorProvider extends ChangeNotifier {
       _setStack([...backstack, page]);
     }
   }
+
+  void goToImageScreen(String bytes) {
+    if (!backstack.contains(imageViewScreen(bytes))) {
+      _setStack([...backstack, imageViewScreen(bytes)]);
+    }
+  }
 }
 
 final navigatorProvider = ChangeNotifierProvider<NavigatorProvider>((ref) {

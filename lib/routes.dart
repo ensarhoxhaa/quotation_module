@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quotation_module/screens/qoutation_details_screen.dart';
+import 'package:quotation_module/screens/quotation_creation_flow/image_view_screen.dart';
 import 'package:quotation_module/screens/quotation_creation_flow/quotation_add_company_details_screen.dart';
 import 'package:quotation_module/screens/quotation_creation_flow/quotation_add_details_screen.dart';
 import 'package:quotation_module/screens/quotation_creation_flow/quotation_add_images_screen.dart';
@@ -28,4 +29,8 @@ const quotationAddCompanyDetailsScreen = MaterialPage(
 const quotationAddImagesScreen = MaterialPage(
   key: ValueKey("/quotationAddImagesScreen"),
   child: QuotationAddImagesScreen(),
+);
+
+MaterialPage imageViewScreen(String bytes) => MaterialPage(
+  child: ImageViewScreen(bytes: bytes),
 );

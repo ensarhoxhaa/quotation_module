@@ -25,4 +25,6 @@ class QuotationDetailsNotifier extends Notifier<QuotationDetailsState> {
     initQuotationDetails(quotation);
     ref.read(navigatorProvider).goToPage(quotationDetailsScreen);
   }
+
+
 }

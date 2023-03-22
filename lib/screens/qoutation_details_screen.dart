@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quotation_module/components/row_data.dart';
 import 'package:quotation_module/design/text_styles.dart';
+import 'package:quotation_module/navigator_provider.dart';
 import 'package:quotation_module/notifiers/quotation_details_notifier.dart';
 
 class QuotationDetailsScreen extends ConsumerWidget {
@@ -154,7 +155,36 @@ class QuotationDetailsScreen extends ConsumerWidget {
                     .read(quotationDetailsNotifier)
                     .quotation!
                     .totalPrice
-                    .toString())
+                    .toString()),
+            SizedBox(height: 10,),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: ref.watch(quotationDetailsNotifier).quotation!.photos.length,
+              itemBuilder: (context, index) => Container(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 4),
+                    child: InkWell(
+                      onTap: () {
+                        ref.read(navigatorProvider).goToImageScreen(ref.read(quotationDetailsNotifier).quotation!.photos[index]
+                            .bytes);
+                      },
+                      child: Container(
+                        height: 48,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(ref.watch(quotationDetailsNotifier).quotation!.photos[index]
+                                .name),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )),
+            ),
           ],
         ),
       ),

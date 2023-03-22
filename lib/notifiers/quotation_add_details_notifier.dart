@@ -9,7 +9,7 @@ import 'package:quotation_module/services/validation_service.dart';
 import 'package:quotation_module/state/qoutation_add_details_state.dart';
 
 final quotationAddDetailsNotifier =
-NotifierProvider<QuotationAddDetailsNotifier, QuotationAddDetailsState>(() {
+    NotifierProvider<QuotationAddDetailsNotifier, QuotationAddDetailsState>(() {
   return QuotationAddDetailsNotifier();
 });
 
@@ -43,7 +43,7 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
 
   bool _validateForm() {
     bool isValid =
-    ref.read(validationService).validateField(state.titleController.text);
+        ref.read(validationService).validateField(state.titleController.text);
     state = state.copyWith(titleError: !isValid);
     return isValid;
   }
@@ -64,22 +64,38 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
       itemList.add(LineItem(
           title: state.lineItemsControllers[i].titleController.text,
           price: ref.read(parsingService).parseDoubleFromString(
-              state.lineItemsControllers[i].titleController.text),
-          quantity: ref.read(parsingService).parseDoubleFromString(state.lineItemsControllers[i].titleController.text),
-          totalPrice:
-          ref.read(parsingService).parseDoubleFromString(state.lineItemsControllers[i].titleController.text)));
+              state.lineItemsControllers[i].priceController.text),
+          quantity: ref.read(parsingService).parseDoubleFromString(
+              state.lineItemsControllers[i].quantityController.text),
+          totalPrice: ref.read(parsingService).parseDoubleFromString(
+              state.lineItemsControllers[i].totalController.text)));
+    }
+    if(checkIfFirstItemIsEmpty()) {
+      itemList.removeAt(0);
+      return [];
     }
     return itemList;
+  }
+
+  checkIfFirstItemIsEmpty() {
+    if (state.lineItemsControllers[0].totalController.text.isEmpty &&
+        state.lineItemsControllers[0].quantityController.text.isEmpty &&
+        state.lineItemsControllers[0].priceController.text.isEmpty &&
+        state.lineItemsControllers[0].titleController.text.isEmpty) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   calculateLineItemPrice(int index) {
     if (state.lineItemsControllers[index].priceController.text.isEmpty ||
         state.lineItemsControllers[index].quantityController.text.isEmpty) {
       state.lineItemsControllers[index].totalController.text = "";
-    }
-    else {
+    } else {
       double totalPrice = ref.read(parsingService).parseDoubleFromString(
-          state.lineItemsControllers[index].priceController.text) +
+              state.lineItemsControllers[index].priceController.text) +
           ref.read(parsingService).parseDoubleFromString(
               state.lineItemsControllers[index].quantityController.text);
       state.lineItemsControllers[index].totalController.text =
@@ -97,7 +113,9 @@ class QuotationAddDetailsNotifier extends Notifier<QuotationAddDetailsState> {
   List<double> getAllListItemsPrices() {
     List<double> listItemPrices = [];
     for (var element in state.lineItemsControllers) {
-      listItemPrices.add(ref.read(parsingService).parseDoubleFromString(element.totalController.text));
+      listItemPrices.add(ref
+          .read(parsingService)
+          .parseDoubleFromString(element.totalController.text));
     }
     return listItemPrices;
   }
